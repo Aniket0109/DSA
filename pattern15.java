@@ -8,6 +8,7 @@ public class pattern15 {
         int n = sc.nextInt();
 
         int sp = n/2, no = 1;
+        int val = 1;
 
         for(int i=1; i<=n; i++){
 
@@ -17,29 +18,29 @@ public class pattern15 {
 
             }
 
+            int currentVal = val;
             for(int j=1; j<=no; j++){
 
-                if(i>n/2+1){
-                    
-                    System.out.print((n+1-i)+(j-1)+"\t");
+                System.out.print(currentVal +"\t");
 
+                if(j<=no/2) {
+                    currentVal++;
                 } else {
-
-                    System.out.print(i+(j-1)+"\t");
-
+                    currentVal--;
                 }
-
             }
 
             if(i<=n/2){
 
                 sp--;
                 no+=2;
+                val++;
 
             } else {
 
                 sp++;
                 no-=2;
+                val--;
 
             }
 
