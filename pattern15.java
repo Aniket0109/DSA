@@ -19,7 +19,15 @@ public class pattern15 {
 
             for(int j=1; j<=no; j++){
 
-                System.out.print(j+"\t");
+                if(i>n/2+1){
+                    
+                    System.out.print((n+1-i)+(j-1)+"\t");
+
+                } else {
+
+                    System.out.print(i+(j-1)+"\t");
+
+                }
 
             }
 
