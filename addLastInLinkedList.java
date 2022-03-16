@@ -34,6 +34,25 @@ public class addLastInLinkedList {
             }
             size++;
         }
+
+        int size(){
+
+            return size;
+
+        }
+
+        void display(){
+
+            Node temp = head;
+
+            while (temp!=null){
+
+                System.out.print(temp.data+" ");
+                temp = temp.next;
+
+            }
+            System.out.println();
+        }
     }
 
     public static void testList(LinkedList list) {
@@ -66,9 +85,18 @@ public class addLastInLinkedList {
                 int val = Integer.parseInt(str.split(" ")[1]);
                 list.addLast(val);
 
+            } else if(str.startsWith("size")){
+
+                System.out.println(list.size());
+
+            } else if(str.startsWith("display")){
+
+                list.display();
             }
 
             testList(list);
+
+            str = br.readLine();
 
         }
     }
