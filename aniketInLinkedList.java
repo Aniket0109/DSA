@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class addLastInLinkedList {
+public class aniketInLinkedList {
 
     public static class Node{
 
@@ -53,6 +53,25 @@ public class addLastInLinkedList {
             }
             System.out.println();
         }
+
+        void remove(){
+
+            if(size==0){
+
+                System.out.println("List is empty");
+
+            } else if(size==1){
+
+                tail = head = null;
+                size = 0;
+
+            } else {
+
+                head = head.next;
+                size--;
+                
+            }
+        }
     }
 
     public static void testList(LinkedList list) {
@@ -92,6 +111,10 @@ public class addLastInLinkedList {
             } else if(str.startsWith("display")){
 
                 list.display();
+            } else if(str.startsWith("remove")){
+
+                list.remove();
+
             }
 
             testList(list);
