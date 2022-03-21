@@ -167,7 +167,36 @@ public class aniketInLinkedList {
                     temp.next = node;
 
                     size++;
+
                 }
+            }
+        }
+
+        void removeLast(){
+
+            if(size==0){
+
+                System.out.println("List is Empty");
+
+            } else if(size==1){
+
+                head = null;
+                tail = null;
+                size = 0;
+
+            } else {
+
+                Node temp = head;
+
+                for(int i=0;i<size-2;i++){
+
+                    temp = temp.next;
+
+                }
+
+                tail = temp;
+                temp.next = null;
+                size--;
             }
         }
     }
@@ -245,6 +274,16 @@ public class aniketInLinkedList {
                 list.addFirst(val);
 
             } else if(str.startsWith("addAt")){
+
+                int idx = Integer.parseInt(str.split(" ")[1]);
+                int val = Integer.parseInt(str.split(" ")[2]);
+                list.addAt(idx,val);
+
+            } else if(str.startsWith("removeLast")){
+
+                list.removeLast();
+
+            } else if(str.startsWith("removeAt")){
 
                 int idx = Integer.parseInt(str.split(" ")[1]);
                 int val = Integer.parseInt(str.split(" ")[2]);
