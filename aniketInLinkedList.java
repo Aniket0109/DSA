@@ -10,7 +10,7 @@ public class aniketInLinkedList {
 
     }
 
-    public  static class LinkedList{
+    public static class LinkedList{
 
         Node head;
         Node tail;
@@ -234,9 +234,37 @@ public class aniketInLinkedList {
             }
         }
 
-        void reverse(){
+        private Node getNodeAt(int idx){
 
-            
+            Node temp = head;
+
+            for(int i=0;i<size-2;i++){
+
+                temp = temp.next;
+
+            }
+
+            return temp;
+        }
+
+        public void reverse(){
+
+            int li = 0;
+            int ri = size -1;
+
+            while (li<ri){
+
+                Node left = getNodeAt(li);
+                Node right = getNodeAt(ri);
+
+                int temp = left.data;
+                left.data = right.data;
+                right.data = temp;
+
+                li++;
+                ri--;
+                
+            }
         }
     }
 
