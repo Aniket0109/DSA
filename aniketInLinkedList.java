@@ -54,7 +54,7 @@ public class aniketInLinkedList {
             System.out.println();
         }
 
-        void remove(){
+        void removeFirst(){
 
             if(size==0){
 
@@ -199,6 +199,45 @@ public class aniketInLinkedList {
                 size--;
             }
         }
+
+        void removeAt(int idx){
+
+            if(idx>=size||idx<0){
+
+                System.out.println("Invalid Arguments");
+
+            } else {
+
+                if(idx==0){
+
+                    removeFirst();
+
+                } else if(idx==size-1){
+
+                    removeLast();
+
+                } else {
+
+                    Node temp = head;
+
+                    for(int i=0; i<idx-1; i++){
+
+                        temp = temp.next;
+
+                    }
+
+                    temp.next = temp.next.next;
+
+                    size--;
+
+                }
+            }
+        }
+
+        void reverse(){
+
+            
+        }
     }
 
     public static void testList(LinkedList list) {
@@ -241,7 +280,7 @@ public class aniketInLinkedList {
 
             } else if(str.startsWith("remove")){
 
-                list.remove();
+                list.removeFirst();
 
             } else if(str.startsWith("get first")){
 
@@ -286,8 +325,11 @@ public class aniketInLinkedList {
             } else if(str.startsWith("removeAt")){
 
                 int idx = Integer.parseInt(str.split(" ")[1]);
-                int val = Integer.parseInt(str.split(" ")[2]);
-                list.addAt(idx,val);
+                list.removeAt(idx);
+
+            } else if(str.startsWith("reverse")){
+
+                list.reverse();
 
             }
 
