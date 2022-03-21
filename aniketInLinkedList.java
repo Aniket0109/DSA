@@ -69,7 +69,105 @@ public class aniketInLinkedList {
 
                 head = head.next;
                 size--;
-                
+
+            }
+        }
+
+        public int getFirst(){
+
+            if(size==0){
+
+                System.out.println("List is Empty");
+                return -1;
+
+            } else {
+
+                return head.data;
+
+            }
+        }
+
+        public int getLast(){
+
+            if(size==0){
+
+                System.out.println("List is Empty");
+                return -1;
+
+            } else {
+
+                return tail.data;
+
+            }
+        }
+
+        public int getAt(int idx){
+
+            if(idx>=size){
+
+                System.out.println("Invalid Arguments");
+                return -1;
+
+            } else {
+
+                Node temp = head;
+                while(idx-->0){
+
+                    temp = temp.next;
+
+                }
+                return temp.data;
+            }
+        }
+
+        void addFirst(int val){
+
+            Node temp = new Node();
+            temp.data = val;
+            temp.next = head;
+            head = temp;
+
+            if(size == 0) {
+
+                tail = temp;
+
+            }
+            size++;
+        }
+
+        void addAt(int idx, int val){
+
+            if(idx>=size||idx<0){
+
+                System.out.println("Invalid Arguments");
+
+            } else {
+
+                if(idx==0){
+
+                    addFirst(val);
+
+                } else if(idx==size-1){
+
+                    addLast(val);
+
+                } else {
+
+                    Node temp = head;
+                    Node node = new Node();
+                    node.data = val;
+
+                    for(int i=0; i<idx-1; i++){
+
+                        temp = temp.next;
+
+                    }
+
+                    node.next = temp.next;
+                    temp.next = node;
+
+                    size++;
+                }
             }
         }
     }
@@ -111,9 +209,46 @@ public class aniketInLinkedList {
             } else if(str.startsWith("display")){
 
                 list.display();
+
             } else if(str.startsWith("remove")){
 
                 list.remove();
+
+            } else if(str.startsWith("get first")){
+
+                if(list.getFirst()!=-1){
+
+                    System.out.println(list.getFirst());
+
+                }
+
+            } else if(str.startsWith("get last")){
+
+                if(list.getLast()!=-1){
+
+                    System.out.println(list.getLast());
+
+                }
+
+            } else if(str.startsWith("getAt")){
+
+                int idx = Integer.parseInt(str.split(" ")[1]);
+
+                if(list.getAt(idx)!=-1){
+
+                    System.out.println(list.getAt(idx));
+
+                }
+            } else if(str.startsWith("addFirst")){
+
+                int val = Integer.parseInt(str.split(" ")[1]);
+                list.addFirst(val);
+
+            } else if(str.startsWith("addAt")){
+
+                int idx = Integer.parseInt(str.split(" ")[1]);
+                int val = Integer.parseInt(str.split(" ")[2]);
+                list.addAt(idx,val);
 
             }
 
