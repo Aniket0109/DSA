@@ -238,7 +238,7 @@ public class aniketInLinkedList {
 
             Node temp = head;
 
-            for(int i=0;i<size-2;i++){
+            for(int i=0;i<idx;i++){
 
                 temp = temp.next;
 
@@ -247,7 +247,7 @@ public class aniketInLinkedList {
             return temp;
         }
 
-        public void reverse(){
+        public void reverseli(){
 
             int li = 0;
             int ri = size -1;
@@ -263,8 +263,30 @@ public class aniketInLinkedList {
 
                 li++;
                 ri--;
-                
+
             }
+        }
+
+        public void reversepi(){
+
+            if(size <= 1){
+                return;
+            }
+
+            Node prev = null;
+            Node curr = head;
+            while(curr != null){
+                Node next = curr.next;
+
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+
+            Node temp = head;
+            head = tail;
+            tail = temp;
+
         }
     }
 
@@ -355,9 +377,13 @@ public class aniketInLinkedList {
                 int idx = Integer.parseInt(str.split(" ")[1]);
                 list.removeAt(idx);
 
-            } else if(str.startsWith("reverse")){
+            } else if(str.startsWith("reverseli")){
 
-                list.reverse();
+                list.reverseli();
+
+            } else if(str.startsWith("reversepi")){
+
+                list.reversepi();
 
             }
 
