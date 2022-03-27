@@ -272,9 +272,21 @@ public class mergeSortaLinkedList {
         }
 
         public static LinkedList mergeSort(Node head, Node tail){
-            LinkedList sorted = new LinkedList();
 
-            
+            if(head==tail){
+
+                LinkedList br = new LinkedList();
+                br.addLast(head.data);
+                return br;
+
+            }
+
+            Node mid = getMidNode(head, tail);
+
+            LinkedList firstSortedList = mergeSort(head,mid);
+            LinkedList secondSortedList = mergeSort(mid.next,tail);
+
+            LinkedList sorted = LinkedList.mergeTwoSortedLists(firstSortedList,secondSortedList);
 
             return sorted;
         }
