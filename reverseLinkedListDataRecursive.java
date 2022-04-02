@@ -162,33 +162,34 @@ public class reverseLinkedListDataRecursive {
             }
         }
 
-        private void reverseDRHelper(int li, int ri){
+        private void reverseDRHelper(Node right, int floor){
 
-            if(li==ri){
+            if(right==null){
 
                 return;
 
             }
 
-            Node left = getNodeAt(li);
-            Node right = getNodeAt(ri);
+            reverseDRHelper(right.next,floor+1);
 
-            int temp = left.data;
-            left.data = right.data;
-            right.data = temp;
+            if(floor>size/2){
 
-            li++;
-            ri--;
+                int temp = right.data;
+                right.data = left.data;
+                left.data = temp;
 
-            reverseDRHelper(li, ri);
+                left = left.next;
+
+            }
 
         }
 
-        public void reverseDR(){
-            int li = 0;
-            int ri = size - 1;
+        Node left;
 
-            reverseDRHelper(li,ri);
+        public void reverseDR(){
+
+            left = head;
+            reverseDRHelper(head, 0);
 
         }
     }
