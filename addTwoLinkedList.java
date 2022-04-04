@@ -394,44 +394,49 @@ public class addTwoLinkedList {
             tail.next = null;
         }
 
+        public static int addListHelper(Node one, int pv1, Node two, int pv2, LinkedList sum){
+
+            if(one==null&&two==null){
+
+                return 0;
+
+            }
+            int data = 0;
+
+            if(pv1>pv2){
+
+                int oc = addListHelper(one.next,pv1-1,two,pv2,sum);
+                data = one.data + oc;
+
+            } else if(pv1<pv2){
+
+                int oc = addListHelper(one,pv1,two.next,pv2-1,sum);
+                data = two.data + oc;
+
+            } else {
+
+                int oc = addListHelper(one.next,pv1-1,two.next,pv2-1,sum);
+                data = one.data + two.data + oc;
+
+            }
+
+            int nd = data%10;
+            int nc = data/10;
+
+            sum.addFirst(nd);
+            return nc;
+
+        }
+
         public static LinkedList addTwoLists(LinkedList one, LinkedList two) {
 
             LinkedList sum = new LinkedList();
-            int carry = 0;
 
-            while (one.size>0&&two.size>0){
+            int oc = addListHelper(one.head,one.size, two.head, two.size,sum);
 
-                int a = one.getLast();
-                int b = two.getLast();
-                int add = a+b+carry;
-                carry = add/10;
-                sum.addFirst(add%10);
-                one.size--;
-                two.size--;
+            if(oc>0){
 
-            }
-
-            while(one.size>0){
-
-                int a = one.getLast();
-                int add = a+carry;
-                carry = add/10;
-                sum.addFirst(add%10);
-                one.size--;
-            }
-
-            while(two.size>0){
-
-                int b = two.getLast();
-                int add = b +carry;
-                carry = add/10;
-                sum.addFirst(add%10);
-                two.size--;
-            }
-
-            if(carry!=0){
-
-                sum.addFirst(carry);
+                sum.addFirst(oc);
 
             }
             return sum;
