@@ -396,19 +396,34 @@ public class intersectionOfLinkedLists {
 
         public static int findIntersection(LinkedList one, LinkedList two){
 
-            for(Node temp = one.head; temp!=null; temp = temp.next){
+            Node temp1 = one.head;
+            Node temp2 = two.head;
 
-                for(Node tmp = two.head; tmp!=null; tmp = tmp.next){
+            int delta = Math.abs(one.size-two.size);
 
-                    if(temp==tmp){
+            if(one.size> two.size){
 
-                        return tmp.data;
+                while(delta-->0){
 
-                    }
+                    temp1 = temp1.next;
+
+                }
+            } else {
+
+                while(delta-->0){
+
+                    temp2 = temp2.next;
+
                 }
             }
 
-            return 0;
+            while(temp1!=temp2){
+
+                temp1 = temp1.next;
+                temp2 = temp2.next;
+
+            }
+            return temp1.data;
         }
     }
 
