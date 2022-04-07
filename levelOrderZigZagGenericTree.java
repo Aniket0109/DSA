@@ -1,11 +1,9 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Stack;
 
-public class levelOrderLineWiseGenericTree {
+public class levelOrderZigZagGenericTree {
 
     private static class Node {
         int data;
@@ -13,11 +11,11 @@ public class levelOrderLineWiseGenericTree {
     }
 
     public static void display(Node node) {
-        String str = node.data + " -> ";
+        StringBuilder str = new StringBuilder(node.data + " -> ");
         for (Node child : node.children) {
-            str += child.data + ", ";
+            str.append(child.data).append(", ");
         }
-        str += ".";
+        str.append(".");
         System.out.println(str);
 
         for (Node child : node.children) {
@@ -29,12 +27,12 @@ public class levelOrderLineWiseGenericTree {
         Node root = null;
 
         Stack<Node> st = new Stack<>();
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == -1) {
+        for (int j : arr) {
+            if (j == -1) {
                 st.pop();
             } else {
                 Node t = new Node();
-                t.data = arr[i];
+                t.data = j;
 
                 if (st.size() > 0) {
                     st.peek().children.add(t);
@@ -96,21 +94,42 @@ public class levelOrderLineWiseGenericTree {
         System.out.println("Node Post " + node.data);
     }
 
-    public static void levelOrderLinewise(Node node){
-        Queue<Node> q1 = new ArrayDeque<>();
-        Queue<Node> q2 = new ArrayDeque<>();
-        q1.add(node);
+    public static void levelOrderLinewiseZZ(Node node){
+        Stack<Node> ms = new Stack<>();
+        Stack<Node> cs = new Stack<>();
+        ms.push(node);
+        boolean level=false;
 
-        while(q1.size()>0) {
+        while(ms.size()>0){
 
-            node = q1.remove();
-            q2.addAll(node.children);
-            System.out.print(node.data + " ");
+            node = ms.pop();
+            System.out.print(node.data+" ");
 
-            if (q1.size() == 0) {
+            if(!level){
 
-                q1 = q2;
-                q2 = new ArrayDeque<>();
+                for(int i=0; i<node.children.size(); i++){
+
+                    Node child = node.children.get(i);
+                    cs.push(child);
+
+                }
+
+            } else {
+
+                for(int i = node.children.size()-1; i>=0; i--){
+
+                    Node child = node.children.get(i);
+                    cs.push(child);
+
+                }
+
+            }
+
+            if(ms.size()==0){
+
+                ms = cs;
+                level = true;
+                cs = new Stack<>();
                 System.out.println();
 
             }
@@ -127,6 +146,6 @@ public class levelOrderLineWiseGenericTree {
         }
 
         Node root = construct(arr);
-        levelOrderLinewise(root);
+        levelOrderLinewiseZZ(root);
     }
 }
