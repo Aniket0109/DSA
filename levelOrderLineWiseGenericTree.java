@@ -101,24 +101,21 @@ public class levelOrderLineWiseGenericTree {
         Queue<Node> q2 = new ArrayDeque<>();
         q1.add(node);
 
-        while(q1.size()>0) {
-            while (q1.size() > 0) {
+        while(q1.size()>0){
 
-                node = q1.remove();
-                q2.addAll(node.children);
-                System.out.print(node.data + " ");
+            node = q1.remove();
+            q2.addAll(node.children);
+            System.out.print(node.data+" ");
 
+            if(q1.size()==0){
+
+                q1 = q2;
+                q2 = new ArrayDeque<>();
+                System.out.println();
+                
             }
-            System.out.println();
-
-            while (q2.size() > 0) {
-
-                node = q2.remove();
-                q1.addAll(node.children);
-                System.out.print(node.data + " ");
-            }
-            System.out.println();
         }
+
     }
 
     public static void main(String[] args) throws Exception {
