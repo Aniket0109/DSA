@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class levelOrderTraversal {
+public class levelOrderLineWiseGenericTree {
 
     private static class Node {
         int data;
@@ -96,19 +96,29 @@ public class levelOrderTraversal {
         System.out.println("Node Post " + node.data);
     }
 
-    public static void levelOrder(Node node){
+    public static void levelOrderLinewise(Node node){
+        Queue<Node> q1 = new ArrayDeque<>();
+        Queue<Node> q2 = new ArrayDeque<>();
+        q1.add(node);
 
-        Queue<Node> q = new ArrayDeque<>();
-        q.add(node);
+        while(q1.size()>0) {
+            while (q1.size() > 0) {
 
-        while(q.size()>0){
+                node = q1.remove();
+                q2.addAll(node.children);
+                System.out.print(node.data + " ");
 
-            node = q.remove();
-            System.out.print(node.data+" ");
-            q.addAll(node.children);
+            }
+            System.out.println();
 
+            while (q2.size() > 0) {
+
+                node = q2.remove();
+                q1.addAll(node.children);
+                System.out.print(node.data + " ");
+            }
+            System.out.println();
         }
-        System.out.println(".");
     }
 
     public static void main(String[] args) throws Exception {
@@ -121,6 +131,6 @@ public class levelOrderTraversal {
         }
 
         Node root = construct(arr);
-        levelOrder(root);
+        levelOrderLinewise(root);
     }
 }
