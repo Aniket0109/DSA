@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class findAnElementInGenericTree {
+public class nodeToRootPathInGenericTree {
 
     private static class Node {
         int data;
@@ -47,26 +47,12 @@ public class findAnElementInGenericTree {
         return root;
     }
 
-    public static boolean find(Node node, int data) {
+    public static ArrayList<Integer> nodeToRootPath(Node node, int data){
 
-        if (node.data == data) {
+        ArrayList<Integer> ans = new ArrayList<>();
 
-            return true;
-
-        }
-        for(Node child:node.children) {
-
-            boolean ans =  find(child, data);
-            if(ans){
-
-                return true;
-
-            }
-
-        }
-        return false;
+        return ans;
     }
-
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -79,8 +65,8 @@ public class findAnElementInGenericTree {
         int data = Integer.parseInt(br.readLine());
 
         Node root = construct(arr);
-        boolean flag = find(root, data);
-        System.out.println(flag);
+        ArrayList<Integer> path = nodeToRootPath(root, data);
+        System.out.println(path);
         // display(root);
     }
 }
