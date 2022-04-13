@@ -167,6 +167,26 @@ public class linearizeAGenericTree {
         }
     }
 
+    public static Node linearize2(Node node){
+
+        if(node.children.size()==0){
+
+            return node;
+
+        }
+
+        Node lastKiTail = linearize2(node.children.get(node.children.size()-1));
+        while (node.children.size() > 1){
+
+            Node last = node.children.remove(node.children.size()-1);
+            Node secondLast = node.children.get(node.children.size()-1);
+            Node secondLastKiTail = linearize2(secondLast);
+            secondLastKiTail.children.add(last);
+
+        }
+        return lastKiTail;
+    }
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -178,6 +198,7 @@ public class linearizeAGenericTree {
 
         Node root = construct(arr);
         linearize(root);
+        linearize2(root);
         display(root);
     }
 }
