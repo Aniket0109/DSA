@@ -49,9 +49,26 @@ public class nodeToRootPathInGenericTree {
 
     public static ArrayList<Integer> nodeToRootPath(Node node, int data){
 
-        ArrayList<Integer> ans = new ArrayList<>();
+        if(node.data == data){
 
-        return ans;
+            ArrayList<Integer> ans = new ArrayList<>();
+            ans.add(node.data);
+            return ans;
+
+        }
+
+        for(Node child: node.children){
+
+            ArrayList<Integer> ans = nodeToRootPath(child, data);
+            if(ans.size()>0){
+
+                ans.add(node.data);
+                return ans;
+
+            }
+        }
+
+        return new ArrayList<>();
     }
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
