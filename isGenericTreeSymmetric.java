@@ -82,25 +82,32 @@ public class isGenericTreeSymmetric {
         return h;
     }
 
-    public static boolean IsSymmetric(Node node) {
+    public static boolean areMirror(Node n1, Node n2) {
+        if(n1.children.size()!=n2.children.size()){
 
-        for(int i=0; i<node.children.size()/2; i++){
+            return false;
 
-            Node n1 = node.children.get(i);
-            Node n2 = node.children.get(node.children.size()-1-i);
+        }
 
-            if(n1.children.size()!=n2.children.size()){
+        for(int i=0; i<n1.children.size(); i++){
+
+            Node c1 = n1.children.get(i);
+            Node c2 = n2.children.get(n1.children.size()-1-i);
+
+            if(!areMirror(c1,c2)){
 
                 return false;
 
             }
         }
-        for(Node child: node.children){
 
-            IsSymmetric(child);
-
-        }
         return true;
+    }
+
+    public static boolean IsSymmetric(Node node) {
+
+        return areMirror(node, node);
+        
     }
 
     public static void main(String[] args) throws Exception {
