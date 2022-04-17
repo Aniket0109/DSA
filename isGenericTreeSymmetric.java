@@ -107,7 +107,7 @@ public class isGenericTreeSymmetric {
     public static boolean IsSymmetric(Node node) {
 
         return areMirror(node, node);
-        
+
     }
 
     public static void main(String[] args) throws Exception {
