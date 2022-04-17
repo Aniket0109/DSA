@@ -59,6 +59,12 @@ public class predecessorAndSuccessorOfAnElement {
             } else {
                 predecessor = node;
             }
+
+        } else if(state==1){
+
+            successor = node;
+            state = 2;
+
         }
         for(Node child:node.children){
 
