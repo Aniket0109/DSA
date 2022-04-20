@@ -47,6 +47,30 @@ public class nodeWithMaximumSubtreeSum {
         return root;
     }
 
+    static int maximumSumNode = 0;
+    static int maximumSum = Integer.MIN_VALUE;
+
+    public static int retSumAndCalculateMax(Node node){
+        int sum = 0;
+
+        for(Node child: node.children){
+
+            int childSum = retSumAndCalculateMax(child);
+            sum += childSum;
+
+        }
+
+        sum+=node.data;
+
+        if(sum>maximumSum){
+
+            maximumSumNode = node.data;
+            maximumSum = sum;
+
+        }
+        return sum;
+    }
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -57,6 +81,8 @@ public class nodeWithMaximumSubtreeSum {
         }
 
         Node root = construct(arr);
-        // write your code here
+        retSumAndCalculateMax(root);
+        System.out.println(maximumSumNode+"@"+maximumSum);
+
     }
 }
