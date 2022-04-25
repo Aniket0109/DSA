@@ -47,26 +47,49 @@ public class iterativePreOrderAndPostOrderTraversalGenericTree {
         return root;
     }
 
+    static class Pair{
+
+        Node node;
+        int state;
+
+         Pair(Node node, int state){
+
+            this.node = node;
+            this.state = state;
+
+        }
+    }
+
     public static void IterativePreAndPostOrder(Node node) {
 
-        for(Node child: node.children) {
-            for (int i = 0; i < child.children.size(); i++) {
+        Stack<Pair> st = new Stack<>();
+        st.push(new Pair(node,-1));
 
-                System.out.print(child.children.get(i).data + " ");
+        StringBuilder pre = new StringBuilder(" ");
+        StringBuilder post = new StringBuilder(" ");
+        while (st.size()>0){
+
+            Pair top = st.peek();
+            if(top.state==-1){
+
+                pre.append(top.node.data).append(" ");
+                top.state++;
+
+            } else if(top.state==top.node.children.size()){
+
+                post.append(top.node.data).append(" ");
+                st.pop();
+
+            } else {
+
+                Pair cp = new Pair(top.node.children.get(top.state), -1);
+                st.push(cp);
+                top.state++;
 
             }
         }
-
-        System.out.println();
-
-        for(Node child: node.children) {
-            for (int i = child.children.size() - 1; i >= 0; i--) {
-
-                System.out.print(child.children.get(i).data + " ");
-
-            }
-        }
-        System.out.println();
+        System.out.println(pre);
+        System.out.println(post);
     }
 
     public static void main(String[] args) throws Exception {
