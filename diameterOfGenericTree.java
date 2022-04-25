@@ -48,21 +48,32 @@ public class diameterOfGenericTree {
 
     static int maximumDiameter = 0;
     public static int diameterHelper(Node node){
-        int d = 0;
+        int h = -1;
+        int sch = -1;
 
         for(Node child : node.children){
 
-            int diameter = diameterHelper(child);
-            d += diameter;
+            int height = diameterHelper(child);
+
+            if(height > h){
+
+                sch = h;
+                h = height;
+
+            } else if(height >sch) {
+
+                sch = height;
+
+            }
         }
-        d++;
 
-        if(d>maximumDiameter){
+        if(h+sch+2 >maximumDiameter){
 
-            maximumDiameter = d;
+            maximumDiameter = h+sch+2;
 
         }
-        return d;
+        h+=1;
+        return h;
     }
 
     public static void main(String[] args) throws Exception {
@@ -75,6 +86,7 @@ public class diameterOfGenericTree {
         }
 
         Node root = construct(arr);
-        System.out.println(diameterHelper(root));
+        diameterHelper(root);
+        System.out.println(maximumDiameter);
     }
 }
