@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class maxSizeSumBinaryTree {
+public class maxSizeSumHeightBinaryTree {
 
     public static int size(BinaryTree.Node node) {
         int s=0;
