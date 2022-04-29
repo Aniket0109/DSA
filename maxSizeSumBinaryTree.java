@@ -37,12 +37,11 @@ public class maxSizeSumBinaryTree {
     }
 
     public static int height(BinaryTree.Node node) {
-        int ht = 0;
+        int ht = -1;
         if(node != null){
-            ht++;
             int rHt = height(node.right);
             int lHt = height(node.left);
-            ht = Math.max(ht+lHt,ht+rHt);
+            ht = Math.max(lHt,rHt)+1;
         }
         return ht;
     }
