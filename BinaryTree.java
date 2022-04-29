@@ -2,12 +2,7 @@ import java.util.Stack;
 
 public class BinaryTree {
 
-    public static class binaryTree{
-
-
-    }
-
-    private static class Node{
+    public static class Node{
 
         int data;
         Node left;
@@ -84,5 +79,6 @@ public class BinaryTree {
 
             }
         }
+        displayBinaryTree.displayBinaryT(root);
     }
 }
