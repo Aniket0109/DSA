@@ -9,14 +9,16 @@ public class iterativePrePostInOrderTraversals {
         Stack<BinaryTree.Pair> st = new Stack<>();
         BinaryTree.Pair rootPair = new BinaryTree.Pair(node, 1);
         st.push(rootPair);
-        String pre = "Pre : ", in = "In : ", post = "Post : ";
+        StringBuilder pre = new StringBuilder("Pre : ");
+        StringBuilder in = new StringBuilder("In : ");
+        StringBuilder post = new StringBuilder("Post : ");
 
         while (st.size()>0){
 
             BinaryTree.Pair top = st.peek();
             if(top.state==1){
 
-                pre += top.node.data + "";
+                pre.append(top.node.data).append(" ");
                 top.state++;
 
                 if(top.node.left!=null){
@@ -27,7 +29,7 @@ public class iterativePrePostInOrderTraversals {
 
             } else if(top.state==2){
 
-                in += top.node.data + "";
+                in.append(top.node.data).append(" ");
                 top.state++;
 
                 if(top.node.right!=null){
@@ -38,7 +40,7 @@ public class iterativePrePostInOrderTraversals {
 
             } else {
 
-                post += top.node.data+"";
+                post.append(top.node.data).append(" ");
                 st.pop();
 
             }
