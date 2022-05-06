@@ -18,6 +18,37 @@ public class diameterOfBinaryTree {
         return Math.max(f, Math.max(ld, rd));
     }
 
+    static class DiaPair {
+
+        int ht;
+        int dia;
+
+    }
+
+    public static DiaPair diameter2(BinaryTree.Node node){
+
+        if(node==null){
+
+            DiaPair ndp = new DiaPair();
+            ndp.ht = -1;
+            ndp.dia = 0;
+            return ndp;
+
+        }
+
+        DiaPair lp = diameter2(node.left);
+        DiaPair rp = diameter2(node.right);
+
+        DiaPair mp = new DiaPair();
+        mp.ht = Math.max(lp.ht, rp.ht)+1;
+
+        int fes = lp.ht + rp.ht+2;
+        mp.dia = Math.max(fes, Math.max(lp.dia,rp.dia));
+
+        return mp;
+
+    }
+
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,6 +65,10 @@ public class diameterOfBinaryTree {
         BinaryTree.Node root = BinaryTree.construct(arr);
         int diameter;
         diameter = diameter1(root);
+        System.out.println("First trick :");
         System.out.println(diameter);
+        DiaPair ans = diameter2(root);
+        System.out.println("Second trick :");
+        System.out.println(ans.dia);
     }
 }
