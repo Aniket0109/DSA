@@ -70,5 +70,6 @@ public class diameterOfBinaryTree {
         DiaPair ans = diameter2(root);
         System.out.println("Second trick :");
         System.out.println(ans.dia);
+
     }
 }
