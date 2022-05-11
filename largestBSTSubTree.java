@@ -1,13 +1,15 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class isBinaryTreeABinarySearchTree {
+public class largestBSTSubTree {
 
     public static class isBSTPair{
 
         boolean isBST;
         int max;
         int min;
+        BinaryTree.Node root;
+        int size;
 
     }
 
@@ -19,6 +21,8 @@ public class isBinaryTreeABinarySearchTree {
             bp.isBST = true;
             bp.max = Integer.MIN_VALUE;
             bp.min = Integer.MAX_VALUE;
+            bp.root = null;
+            bp.size = 0;
             return bp;
 
         }
@@ -32,6 +36,22 @@ public class isBinaryTreeABinarySearchTree {
         mp.max = Math.max(node.data, Math.max(rp.max, lp.max));
         mp.min = Math.min(node.data, Math.min(rp.min, lp.min));
 
+        if(mp.isBST){
+
+            mp.root = node;
+            mp.size = lp.size+ rp.size+1;
+
+        } else if(lp.size> rp.size) {
+
+            mp.root = lp.root;
+            mp.size = lp.size;
+
+        } else {
+
+            mp.root = rp.root;
+            mp.size = rp.size;
+
+        }
         return mp;
     }
 
@@ -49,8 +69,8 @@ public class isBinaryTreeABinarySearchTree {
             }
         }
         BinaryTree.Node root = BinaryTree.construct(arr);
-
-        isBSTPair ans = checkBSTPair(root);
-        System.out.println(ans.isBST);
+        isBSTPair ap = checkBSTPair(root);
+        System.out.println(ap.root.data+"@"+ap.size);
+        
     }
 }
