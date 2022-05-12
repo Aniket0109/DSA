@@ -71,6 +71,6 @@ public class largestBSTSubTree {
         BinaryTree.Node root = BinaryTree.construct(arr);
         isBSTPair ap = checkBSTPair(root);
         System.out.println(ap.root.data+"@"+ap.size);
-        
+
     }
 }
