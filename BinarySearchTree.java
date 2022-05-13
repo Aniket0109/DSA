@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 public class BinarySearchTree {
 
     public static class Node{
@@ -42,8 +40,7 @@ public class BinarySearchTree {
         Node lc = construct(arr, lo, mid-1);
         Node rc = construct(arr,mid+1, hi);
 
-        Node node = new Node(data, lc, rc);
-        return node;
+        return new Node(data, lc, rc);
     }
 
     public static void main(String[] args) throws Exception{
