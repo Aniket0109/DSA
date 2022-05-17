@@ -33,7 +33,7 @@ public class removeNodeToBST {
             } else {
                 return null;
             }
-            
+
         }
         return node;
     }
