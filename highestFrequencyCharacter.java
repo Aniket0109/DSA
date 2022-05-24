@@ -21,7 +21,7 @@ public class highestFrequencyCharacter {
 
         Set<Character> keys = hm.keySet();
         int max = Integer.MIN_VALUE;
-        char ans = 'z';
+        char ans = s.charAt(0);
         for(char key : keys){
 
             int val = hm.get(key);
