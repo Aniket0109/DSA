@@ -82,7 +82,7 @@ public class priorityQueueUsingHeap {
         }
 
         public int size() {
-            return data.size()-1;
+            return data.size();
         }
     }
 
