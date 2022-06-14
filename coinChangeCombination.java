@@ -18,8 +18,8 @@ public class coinChangeCombination {
         dp[0] = 1;
 
         for(int coin : arr){
-            for(int j=coin; j<dp.length; j++){
-                dp[j] += dp[j - coin];
+            for(int amt = coin; amt <dp.length; amt++){
+                dp[amt] += dp[amt - coin];
             }
         }
         System.out.println(dp[target]);
