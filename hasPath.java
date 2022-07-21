@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class hasPath {
 
-    static class Edge {
+    static class Edge extends ArrayList<Edge> {
         int src;
         int nbr;
         int wt;
@@ -18,9 +18,9 @@ public class hasPath {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int vtces = Integer.parseInt(br.readLine());
-        ArrayList<Edge>[] graph = new ArrayList[vtces];
-        for(int i = 0; i < vtces; i++){
+        int vertices = Integer.parseInt(br.readLine());
+        ArrayList<Edge>[] graph = new ArrayList[vertices];
+        for(int i = 0; i < vertices; i++){
             graph[i] = new ArrayList<>();
         }
 
@@ -38,6 +38,27 @@ public class hasPath {
         int dest = Integer.parseInt(br.readLine());
 
         // write your code here
+        boolean[] visited = new boolean[vertices];
+        boolean path = hasPathFunction(graph, src, dest, visited);
+        System.out.println(path);
+
+    }
+
+
+    public static boolean hasPathFunction(ArrayList<Edge>[] graph,int src, int dest, boolean[] visited){
+
+        if(src == dest)
+            return true;
+        visited[src] = true;
+        for( Edge edge : graph[src]){
+            if (!visited[edge.nbr]) {
+                boolean hasNbrPath = hasPathFunction(graph, edge.nbr, dest, visited);
+                if (hasNbrPath)
+                    return true;
+            }
+        }
+
+        return false;
 
     }
 }
