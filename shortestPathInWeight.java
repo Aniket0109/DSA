@@ -5,6 +5,22 @@ import java.util.PriorityQueue;
 
 public class shortestPathInWeight {
 
+    public static class Pair implements Comparable<Pair> {
+        int vtc;
+        String psf;
+        int wsf;
+
+        Pair(int vtc, String psf, int wsf){
+            this.vtc = vtc;
+            this.psf = psf;
+            this.wsf = wsf;
+        }
+
+        public int compareTo(Pair o){
+            return this.wsf - o.wsf;
+        }
+
+    }
     static class Edge {
         int src;
         int nbr;
@@ -21,7 +37,7 @@ public class shortestPathInWeight {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int vtces = Integer.parseInt(br.readLine());
-        ArrayList< Edge>[] graph = new ArrayList[vtces];
+        ArrayList<Edge>[] graph = new ArrayList[vtces];
         for (int i = 0; i < vtces; i++) {
             graph[i] = new ArrayList<>();
         }
@@ -39,41 +55,31 @@ public class shortestPathInWeight {
         int src = Integer.parseInt(br.readLine());
         boolean[] visited = new boolean[vtces];
 
-        PriorityQueue< Pair> queue = new PriorityQueue<>();
-        queue.add(new Pair(src, src + "", 0));
+        printShortestPath(graph, src, visited);
 
-        while (queue.size() > 0) {
-            Pair rem = queue.remove();
-
-            if (visited[rem.v]) {
-                continue;
-            }
-            visited[rem.v] = true;
-            System.out.println(rem.v + " via " + rem.psf
-                    + " @ " + rem.wsf);
-
-            for (Edge e : graph[rem.v]) {
-                if (!visited[e.nbr]) {
-                    queue.add(new Pair(e.nbr,
-                            rem.psf + e.nbr, rem.wsf + e.wt));
-                }
-            }
-        }
     }
 
-    static class Pair implements Comparable< Pair> {
-        int v;
-        String psf;
-        int wsf;
+    public static void printShortestPath (ArrayList<Edge>[] graph, int src, boolean[] visited){
 
-        Pair(int v, String psf, int wsf) {
-            this.v = v;
-            this.psf = psf;
-            this.wsf = wsf;
-        }
+        PriorityQueue<Pair> q = new PriorityQueue<>();
 
-        public int compareTo(Pair o) {
-            return this.wsf - o.wsf;
+        q.add(new Pair(src,src+"",0));
+
+        while (q.size()>0){
+
+            Pair r = q.remove();
+
+            if(visited[r.vtc])
+                continue;
+
+            System.out.println(r.vtc + " via "+r.psf+" @ "+r.wsf);
+            visited[r.vtc] = true;
+
+            for(Edge e : graph[r.vtc]){
+                if(!visited[e.nbr]){
+                    q.add(new Pair(e.nbr, r.psf + e.nbr + "", r.wsf + e.wt));
+                }
+            }
         }
     }
 }
